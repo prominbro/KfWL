@@ -1,8 +1,14 @@
 # KfWL
 KfWL - Keys for White List 
 Сейчас в России действуют белые списки - доступны ГосУслуги, Яндекс, ВК. Остальные сервисы недоступны.
+
+
 Я не создаю и не арендую собственные обходы, я сортирую и выкладываю лучшие конфиги проверенные на пинг.
+
+
 Авторы подписок из которых я сортирую рабочие обходы: NowMeow Whitelist, WL RUS #1, WL RUS, igareck Cidr, AvenCores Goida #26, zieng2 vless universal и lite, a9fm EtoNeYaProject (Базовая и тест), LowiKLive (Бесплатная подписка), RosTunnel MEGA, GoodBywWL, xcom024, newsigot, airlinkvpn, UWB (Общая подписка и с сайта).
+
+
 Я не гарантирую полную работоспособность подписки, у всех разные операторы
 
 
