@@ -8,7 +8,7 @@ KfWL - Keys for White List
 
 Я не создаю и не арендую собственные конфиги, я сортирую и выкладываю лучшие конфиги проверенные на пинг.
 
-Авторы подписок из которых я сортирую рабочие обходы: NowMeow Whitelist, WL RUS #1, WL RUS Selected, igareck Cidr, AvenCores Goida #26, zieng2 vless universal и lite, a9fm EtoNeYaProject (Базовая и тест), LowiKLive (Бесплатная подписка), RosTunnel MEGA, GoodBywWL, xcom024, newsigot, airlinkvpn, UWB (Общая подписка и с сайта), vpn abroad, OBSpiskov.
+Авторы подписок из которых я сортирую рабочие обходы: NowMeow Whitelist, WL RUS #1, WL RUS Selected, igareck Cidr, AvenCores Goida #26, zieng2 vless universal и lite, a9fm EtoNeYaProject (Базовая и тест), LowiKLive (Бесплатная подписка), RosTunnel MEGA, GoodBywWL, xcom024, newsigot, airlinkvpn, UWB (Общая подписка и с сайта), vpn abroad, OBSpiskov, communitycatler.
 
 
 Я не гарантирую полную работоспособность подписки, у всех разные операторы.
