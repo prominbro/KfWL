@@ -14,7 +14,7 @@ KfWL - Keys for White List
 Я не гарантирую полную работоспособность подписки, у всех разные операторы.
 
 
-KfWL.txt Файл где лежит список отборных конфигураций. Актуальная ссылка https://raw.githubusercontent.com/prominbro/KfWL/refs/heads/main/KfWL.txt Скопируйте и вставьте ее в свой клиент.
+KfWL.txt Файл где лежит список отборных конфигураций. Актуальная ссылка https://raw.githubusercontent.com/prominbro/KfWL/refs/heads/main/KfWL.txt Скопируйте и вставьте ее в свой клиент, KfWL check это более проверенные сервера ссылка - https://raw.githubusercontent.com/prominbro/KfWL/refs/heads/main/KfWLcheck.txt.
 
 
 
