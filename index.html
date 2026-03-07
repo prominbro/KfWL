@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KfWL — Ключи белого списка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        :root {
+            --red-neon: #ff1a40;
+            --red-glow: #ff4d6e;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .title-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .neon-red {
+            color: #ff1a40;
+            text-shadow: 
+                0 0 10px var(--red-neon),
+                0 0 20px var(--red-neon),
+                0 0 40px var(--red-glow);
+        }
+
+        .neon-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--red-neon);
+        }
+        
+        .neon-button:hover {
+            box-shadow: 0 0 40px var(--red-glow);
+            transform: translateY(-3px);
+        }
+
+        .card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(255, 26, 64, 0.35);
+        }
+
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255,26,64,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,26,64,0.06) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.4s ease-out;
+        }
+        
+        details[open] .faq-content {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        .outline-text {
+            -webkit-text-stroke: 4px var(--red-neon);
+            color: transparent;
+            text-shadow: 
+                0 0 8px rgba(255, 26, 64, 0.85),
+                0 0 16px rgba(255, 26, 64, 0.65),
+                0 0 28px rgba(255, 77, 110, 0.45);
+        }
+
+        .modal {
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.8) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-[#050507] text-white grid-bg min-h-screen">
+
+    <!-- HEADER -->
+    <header class="border-b border-white/10 bg-black/80 backdrop-blur-2xl fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-[#ff1a40] rounded-2xl flex items-center justify-center text-3xl font-black neon-red">K</div>
+                <span class="text-4xl font-bold tracking-[-2px] title-font neon-red">KfWL</span>
+            </div>
+            <a href="https://t.me/KfWLRus" target="_blank" 
+               class="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-7 py-3 rounded-3xl text-sm font-medium transition-all">
+                <i class="fa-brands fa-telegram text-xl"></i>
+                <span>Telegram</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="pt-32 pb-24 relative">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-3xl px-6 py-2 text-sm mb-8">
+                <span class="text-[#ff1a40] font-semibold tracking-widest">СЕТЕВАЯ ОПТИМИЗАЦИЯ</span>
+            </div>
+            
+            <h1 class="title-font text-6xl md:text-[4.8rem] lg:text-[5.5rem] font-black leading-[1.05] tracking-[-3px] mb-6">
+                <span class="block">ПРАВИЛЬНАЯ</span>
+                <span class="outline-text block">НАСТРОЙКА СЕТИ</span>
+                <span class="block">БЕЗ ПРОБЛЕМ</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-2xl text-zinc-400 mt-6 leading-tight">
+                Проект предоставляет актуальные ключи с оптимизированной маршрутизацией по белому списку.<br>
+                Стабильные пути. Максимальная скорость. Никаких ошибок в настройке.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-x-20 gap-y-10 mt-16">
+                <div class="text-center">
+                    <div class="text-7xl font-black neon-red">1 000+</div>
+                    <div class="text-sm uppercase tracking-[3px] text-zinc-500 mt-3">КЛЮЧЕЙ</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-7xl font-black neon-red">2-3</div>
+                    <div class="text-sm uppercase tracking-[3px] text-zinc-500 mt-3">ДНЯ ОБНОВЛЕНИЕ</div>
+                </div>
+            </div>
+
+            <div class="mt-16 flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button onclick="showSubscribeModal()" 
+                        class="neon-button group bg-[#ff1a40] hover:bg-[#ff3366] text-black font-bold text-2xl px-16 py-7 rounded-3xl flex items-center gap-5">
+                    <i class="fa-solid fa-bolt text-3xl group-active:rotate-12 transition"></i>
+                    ПОЛУЧИТЬ ПОДПИСКУ
+                </button>
+
+                <button onclick="showMirrorModal()" 
+                        class="neon-button group bg-[#ff1a40] hover:bg-[#ff3366] text-black font-bold text-2xl px-16 py-7 rounded-3xl flex items-center gap-5">
+                    <i class="fa-solid fa-globe text-3xl group-active:rotate-12 transition"></i>
+                    ЗЕРКАЛА GITVERSE
+                </button>
+            </div>
+
+            <p class="mt-5 text-xs tracking-widest text-zinc-500">Обновление каждые 2-3 дня • GitHub + Gitverse (на случай блокировки)</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-white/10">
+        <h2 class="text-5xl font-bold mb-14 text-center title-font tracking-tight">ЧАСТЫЕ ВОПРОСЫ</h2>
+        
+        <div class="space-y-5">
+            <details class="bg-[#0f0f12] border border-white/10 rounded-3xl group open:border-[#ff1a40]/30">
+                <summary class="flex justify-between items-center px-8 py-7 text-xl font-medium cursor-pointer">
+                    Как это работает?
+                    <span class="text-3xl text-[#ff1a40] group-open:rotate-180 transition-transform">↓</span>
+                </summary>
+                <div class="faq-content px-8 pb-8 text-zinc-400 leading-relaxed">
+                    Мы собираем и тестируем тысячи открытых маршрутов. Отбираем самые стабильные и публикуем их как готовые ключи белого списка. 
+                    Подходят для Happ, Karing, Hiddify и других клиентов. Всё максимально просто и безопасно.
+                </div>
+            </details>
+
+            <details class="bg-[#0f0f12] border border-white/10 rounded-3xl group open:border-[#ff1a40]/30">
+                <summary class="flex justify-between items-center px-8 py-7 text-xl font-medium cursor-pointer">
+                    Это безопасно?
+                    <span class="text-3xl text-[#ff1a40] group-open:rotate-180 transition-transform">↓</span>
+                </summary>
+                <div class="faq-content px-8 pb-8 text-zinc-400 leading-relaxed">
+                    Да. Мы не храним логи, не требуем личных данных. Используем только публичные проверенные маршруты. 
+                    Никакого полного туннеля — только нужные ресурсы. Настройка сделана так, чтобы не было никаких проблем.
+                </div>
+            </details>
+
+            <details class="bg-[#0f0f12] border border-white/10 rounded-3xl group open:border-[#ff1a40]/30">
+                <summary class="flex justify-between items-center px-8 py-7 text-xl font-medium cursor-pointer">
+                    Как часто обновлять параметры?
+                    <span class="text-3xl text-[#ff1a40] group-open:rotate-180 transition-transform">↓</span>
+                </summary>
+                <div class="faq-content px-8 pb-8 text-zinc-400 leading-relaxed">
+                    Рекомендуем обновлять ключи каждые 2-3 дня для максимальной стабильности. 
+                    В наших клиентах это происходит автоматически. Никаких ручных действий не нужно.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="py-20 bg-black/70 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold title-font tracking-tight">Выбор клиента</h2>
+                <p class="text-zinc-400 mt-4 text-xl">Скачай приложение и вставь ключ в раздел Remote Profile</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">⚡</div>
+                    <h3 class="text-3xl font-bold mb-3">Happ</h3>
+                    <p class="text-zinc-400 flex-1">Идеален для новичков. Простой интерфейс, моментальная настройка без ошибок.</p>
+                    <a href="https://github.com/Happ-proxy/happ-desktop" target="_blank"
+                       class="mt-10 block text-center py-4 border border-white/30 hover:border-[#ff1a40] rounded-2xl text-sm font-medium transition-colors">
+                        СКАЧАТЬ
+                    </a>
+                </div>
+
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">🔧</div>
+                    <h3 class="text-3xl font-bold mb-3">Karing</h3>
+                    <p class="text-zinc-400 flex-1">Мощный комбайн. Поддержка всех протоколов и правил маршрутизации.</p>
+                    <a href="https://github.com/KaringX/karing" target="_blank"
+                       class="mt-10 block text-center py-4 border border-white/30 hover:border-[#ff1a40] rounded-2xl text-sm font-medium transition-colors">
+                        СКАЧАТЬ
+                    </a>
+                </div>
+
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">👁️</div>
+                    <h3 class="text-3xl font-bold mb-3">Hiddify</h3>
+                    <p class="text-zinc-400 flex-1">Стабильный клиент с лучшими показателями скорости и надёжности.</p>
+                    <a href="https://github.com/hiddify/hiddify-app/releases/" target="_blank"
+                       class="mt-10 block text-center py-4 border border-white/30 hover:border-[#ff1a40] rounded-2xl text-sm font-medium transition-colors">
+                        СКАЧАТЬ
+                    </a>
+                </div>
+
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">🛡️</div>
+                    <h3 class="text-3xl font-bold mb-3">Exclave</h3>
+                    <p class="text-zinc-400 flex-1">Современный клиент с продвинутой маршрутизацией и удобным интерфейсом.</p>
+                    <a href="https://github.com/dyhkwong/Exclave" target="_blank"
+                       class="mt-10 block text-center py-4 border border-white/30 hover:border-[#ff1a40] rounded-2xl text-sm font-medium transition-colors">
+                        СКАЧАТЬ
+                    </a>
+                </div>
+
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">📦</div>
+                    <h3 class="text-3xl font-bold mb-3">Nekobox</h3>
+                    <p class="text-zinc-400 flex-1">Универсальный клиент для ПК и Android. Поддержка всех протоколов.</p>
+                    
+                    <div class="mt-auto flex flex-col gap-3">
+                        <a href="https://github.com/qr243vbi/nekobox" target="_blank"
+                           class="block text-center py-4 border border-white/30 hover:border-[#ff1a40] rounded-2xl text-sm font-medium transition-colors">
+                            СКАЧАТЬ ПК
+                        </a>
+                        <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid" target="_blank"
+                           class="block text-center py-4 border border-white/30 hover:border-[#ff1a40] rounded-2xl text-sm font-medium transition-colors">
+                            СКАЧАТЬ ANDROID
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ГАЙДЫ (с ссылкой на Sidylink) -->
+    <section class="py-20 border-t border-white/10 bg-[#050507]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold title-font tracking-tight">Гайд на клиенты</h2>
+                <p class="text-2xl text-zinc-400 mt-4">
+                    Спасибо 
+                    <a href="https://t.me/wlrforum" target="_blank" 
+                       class="text-[#ff1a40] font-semibold hover:underline">Sidylink</a> 
+                    за подробные видео-гайды ❤️
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">⚡</div>
+                    <h3 class="text-3xl font-bold mb-3">Happ</h3>
+                    <p class="text-zinc-400 flex-1">Пошаговая настройка для новичков</p>
+                    <a href="https://temp.wlrus.lol/arts/happ" target="_blank"
+                       class="mt-10 block text-center py-4 bg-[#ff1a40] hover:bg-[#ff3366] text-black font-bold rounded-2xl transition-colors">
+                        СМОТРЕТЬ ГАЙД
+                    </a>
+                </div>
+
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">🔧</div>
+                    <h3 class="text-3xl font-bold mb-3">Karing</h3>
+                    <p class="text-zinc-400 flex-1">Полная настройка всех функций</p>
+                    <a href="https://temp.wlrus.lol/arts/karing" target="_blank"
+                       class="mt-10 block text-center py-4 bg-[#ff1a40] hover:bg-[#ff3366] text-black font-bold rounded-2xl transition-colors">
+                        СМОТРЕТЬ ГАЙД
+                    </a>
+                </div>
+
+                <div class="card bg-[#0f0f12] border border-white/10 rounded-3xl p-8 flex flex-col h-full">
+                    <div class="text-5xl mb-8">🛡️</div>
+                    <h3 class="text-3xl font-bold mb-3">Exclave / Nekobox</h3>
+                    <p class="text-zinc-400 flex-1">Настройка для ПК и Android (один гайд)</p>
+                    <a href="https://temp.wlrus.lol/arts/exlave_nekobox" target="_blank"
+                       class="mt-10 block text-center py-4 bg-[#ff1a40] hover:bg-[#ff3366] text-black font-bold rounded-2xl transition-colors">
+                        СМОТРЕТЬ ГАЙД
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- МОДАЛЬНЫЕ ОКНА -->
+    <div id="subscribeModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999] flex items-center justify-center p-6">
+        <div class="modal bg-[#0a0a0d] border border-[#ff1a40]/40 rounded-3xl max-w-2xl w-full overflow-hidden">
+            <div class="px-8 py-6 border-b border-white/10 flex justify-between items-center">
+                <h3 class="text-3xl font-bold title-font neon-red">ПОЛУЧИТЬ ПОДПИСКУ</h3>
+                <button onclick="hideSubscribeModal()" class="text-4xl text-zinc-400 hover:text-white transition">×</button>
+            </div>
+
+            <div class="p-8 space-y-8">
+                <div class="bg-[#1a0f12] border border-[#ff1a40]/30 rounded-2xl p-6 space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span class="text-3xl">⚠️</span>
+                        <div>
+                            <p class="text-[#ff4d6e] font-semibold text-lg">ЗАПРЕЩЕНО ИСПОЛЬЗОВАНИЕ P2P И ТОРРЕНТОВ</p>
+                            <p class="text-zinc-400 text-sm">Нарушение приведёт к автоматической блокировке подписки.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="text-3xl">📱</span>
+                        <div>
+                            <p class="text-[#ff4d6e] font-semibold text-lg">ТОЛЬКО ДЛЯ МОБИЛЬНОГО ИНТЕРНЕТА</p>
+                            <p class="text-zinc-400 text-sm">Подписка оптимизирована исключительно под мобильные операторы.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#0f0f12] border border-white/10 rounded-3xl p-7 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="uppercase tracking-[2px] text-xs text-emerald-400">РЕКОМЕНДУЕМАЯ</div>
+                            <h4 class="text-2xl font-bold mt-1">Основная подписка KfWL</h4>
+                            <p class="text-zinc-400 text-sm mt-1">Полный белый список • Максимальная стабильность</p>
+                        </div>
+                        <div class="px-5 py-2 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-2xl self-start">1 000+ ключей</div>
+                    </div>
+                    <button onclick="copySubscription('https://raw.githubusercontent.com/prominbro/KfWL/refs/heads/main/KfWL.txt', this)" 
+                            id="mainBtn"
+                            class="mt-6 w-full bg-white/5 hover:bg-white/10 border border-white/30 py-5 rounded-2xl font-medium flex items-center justify-center gap-3 transition-all disabled:opacity-40">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>СКОПИРОВАТЬ ССЫЛКУ ПОДПИСКИ</span>
+                    </button>
+                </div>
+
+                <div class="bg-[#0f0f12] border border-white/10 rounded-3xl p-7 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="text-2xl font-bold">Мини-подписка KfWLcheck</h4>
+                            <p class="text-zinc-400 text-sm mt-1">Лёгкая версия • Для быстрого теста</p>
+                        </div>
+                    </div>
+                    <button onclick="copySubscription('https://raw.githubusercontent.com/prominbro/KfWL/refs/heads/main/KfWLcheck.txt', this)" 
+                            id="miniBtn"
+                            class="mt-6 w-full bg-white/5 hover:bg-white/10 border border-white/30 py-5 rounded-2xl font-medium flex items-center justify-center gap-3 transition-all disabled:opacity-40">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>СКОПИРОВАТЬ ССЫЛКУ ПОДПИСКИ</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <input type="checkbox" id="agreeCheckbox" 
+                           class="w-6 h-6 accent-[#ff1a40] bg-white/10 border-white/30 rounded-xl cursor-pointer">
+                    <label for="agreeCheckbox" class="text-zinc-300 text-sm leading-tight cursor-pointer">
+                        Я соглашаюсь с условиями использования:<br>
+                        <span class="text-zinc-500">— запрещено P2P/торренты<br>— только мобильный интернет<br>— подписка не для коммерческого использования</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="p-8 border-t border-white/10 bg-black/40 text-center text-xs text-zinc-500">
+                После копирования вставь ссылку в раздел <span class="font-mono text-white">Remote Profile</span> в любом клиенте
+            </div>
+        </div>
+    </div>
+
+    <div id="mirrorModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999] flex items-center justify-center p-6">
+        <div class="modal bg-[#0a0a0d] border border-[#ff1a40]/40 rounded-3xl max-w-2xl w-full overflow-hidden">
+            <div class="px-8 py-6 border-b border-white/10 flex justify-between items-center">
+                <h3 class="text-3xl font-bold title-font neon-red">ЗЕРКАЛА НА GITVERSE</h3>
+                <button onclick="hideMirrorModal()" class="text-4xl text-zinc-400 hover:text-white transition">×</button>
+            </div>
+
+            <div class="p-8 space-y-8">
+                <div class="bg-[#1a0f12] border border-[#ff1a40]/30 rounded-2xl p-6 space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span class="text-3xl">⚠️</span>
+                        <div>
+                            <p class="text-[#ff4d6e] font-semibold text-lg">ЗАПРЕЩЕНО ИСПОЛЬЗОВАНИЕ P2P И ТОРРЕНТОВ</p>
+                            <p class="text-zinc-400 text-sm">Нарушение приведёт к автоматической блокировке подписки.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="text-3xl">📱</span>
+                        <div>
+                            <p class="text-[#ff4d6e] font-semibold text-lg">ТОЛЬКО ДЛЯ МОБИЛЬНОГО ИНТЕРНЕТА</p>
+                            <p class="text-zinc-400 text-sm">Подписка оптимизирована исключительно под мобильные операторы.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#0f0f12] border border-white/10 rounded-3xl p-7 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="uppercase tracking-[2px] text-xs text-emerald-400">РЕКОМЕНДУЕМАЯ</div>
+                            <h4 class="text-2xl font-bold mt-1">Основная подписка KfWL <span class="text-xs bg-[#ff1a40]/20 px-3 py-1 rounded-full">ЗЕРКАЛО</span></h4>
+                            <p class="text-zinc-400 text-sm mt-1">Полный белый список • Максимальная стабильность</p>
+                        </div>
+                        <div class="px-5 py-2 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-2xl self-start">1 000+ ключей</div>
+                    </div>
+                    <button onclick="copySubscription('https://gitverse.ru/api/repos/KfWL/main/raw/branch/main/KfWL.txt', this)" 
+                            id="mainBtnMirror"
+                            class="mt-6 w-full bg-white/5 hover:bg-white/10 border border-white/30 py-5 rounded-2xl font-medium flex items-center justify-center gap-3 transition-all disabled:opacity-40">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>СКОПИРОВАТЬ ССЫЛКУ ЗЕРКАЛА</span>
+                    </button>
+                </div>
+
+                <div class="bg-[#0f0f12] border border-white/10 rounded-3xl p-7 card">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="text-2xl font-bold">Мини-подписка KfWLcheck <span class="text-xs bg-[#ff1a40]/20 px-3 py-1 rounded-full">ЗЕРКАЛО</span></h4>
+                            <p class="text-zinc-400 text-sm mt-1">Лёгкая версия • Для быстрого теста</p>
+                        </div>
+                    </div>
+                    <button onclick="copySubscription('https://gitverse.ru/api/repos/KfWL/main/raw/branch/main/KfWLcheck.txt', this)" 
+                            id="miniBtnMirror"
+                            class="mt-6 w-full bg-white/5 hover:bg-white/10 border border-white/30 py-5 rounded-2xl font-medium flex items-center justify-center gap-3 transition-all disabled:opacity-40">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>СКОПИРОВАТЬ ССЫЛКУ ЗЕРКАЛА</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <input type="checkbox" id="agreeCheckboxMirror" 
+                           class="w-6 h-6 accent-[#ff1a40] bg-white/10 border-white/30 rounded-xl cursor-pointer">
+                    <label for="agreeCheckboxMirror" class="text-zinc-300 text-sm leading-tight cursor-pointer">
+                        Я соглашаюсь с условиями использования:<br>
+                        <span class="text-zinc-500">— запрещено P2P/торренты<br>— только мобильный интернет<br>— подписка не для коммерческого использования</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="p-8 border-t border-white/10 bg-black/40 text-center text-xs text-zinc-500">
+                После копирования вставь ссылку в раздел <span class="font-mono text-white">Remote Profile</span> в любом клиенте
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 text-center text-xs text-zinc-500 border-t border-white/10">
+        KfWL © 2026 • Только проверенные ключи • Настроено так, чтобы всё работало с первого раза
+    </footer>
+
+    <script>
+        function showSubscribeModal() {
+            document.getElementById('subscribeModal').classList.remove('hidden');
+            document.getElementById('subscribeModal').classList.add('flex');
+            document.getElementById('agreeCheckbox').checked = false;
+            document.getElementById('mainBtn').disabled = true;
+            document.getElementById('miniBtn').disabled = true;
+        }
+
+        function hideSubscribeModal() {
+            const modal = document.getElementById('subscribeModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('agreeCheckbox').addEventListener('change', function() {
+            const checked = this.checked;
+            document.getElementById('mainBtn').disabled = !checked;
+            document.getElementById('miniBtn').disabled = !checked;
+        });
+
+        function showMirrorModal() {
+            document.getElementById('mirrorModal').classList.remove('hidden');
+            document.getElementById('mirrorModal').classList.add('flex');
+            document.getElementById('agreeCheckboxMirror').checked = false;
+            document.getElementById('mainBtnMirror').disabled = true;
+            document.getElementById('miniBtnMirror').disabled = true;
+        }
+
+        function hideMirrorModal() {
+            const modal = document.getElementById('mirrorModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('agreeCheckboxMirror').addEventListener('change', function() {
+            const checked = this.checked;
+            document.getElementById('mainBtnMirror').disabled = !checked;
+            document.getElementById('miniBtnMirror').disabled = !checked;
+        });
+
+        async function copySubscription(url, btn) {
+            try {
+                await navigator.clipboard.writeText(url);
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `
+                    <i class="fa-solid fa-check text-emerald-400"></i>
+                    <span class="text-emerald-400">ССЫЛКА СКОПИРОВАНА ✓</span>
+                `;
+                btn.style.borderColor = '#10b981';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.borderColor = '';
+                }, 2500);
+            } catch (err) {
+                alert('Не удалось скопировать. Попробуй ещё раз.');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                hideSubscribeModal();
+                hideMirrorModal();
+            }
+        });
+
+        tailwind.config = { content: [] }
+    </script>
+</body>
+</html>
